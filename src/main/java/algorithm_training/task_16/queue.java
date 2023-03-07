@@ -1,11 +1,11 @@
-package algorithmt_raining.task_16;
+package algorithm_training.task_16;
 
 import java.io.*;
 
 //ссылка на задание https://contest.yandex.ru/contest/45468/problems/16/
 public class queue {
 
-    private static class Node {
+    public static class Node {
             int num;
             Node prev;
             Node next;
@@ -23,9 +23,9 @@ public class queue {
     private Node tail;
 
     public boolean isEmpty(){
-        if (head == null) return true;
-        return false;
+        return head == null;
     }
+
     public void push(int n) {
         if (head == null) {
             var node = new Node(n);
@@ -62,46 +62,43 @@ public class queue {
         size = 0;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         String s;
         queue queue = new queue();
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\algorithmt_raining\\task_16\\input.txt"))) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\java\\algorithmt_raining\\task_16\\output.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\algorithm_training\\task_16\\input.txt"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\java\\algorithm_training\\task_16\\output.txt"))) {
                 while ((s = br.readLine()) != null) {
                     String[] command = s.split(" ");
-                    switch (command[0]){
-                        case "push":
+                    switch (command[0]) {
+                        case "push" -> {
                             int n = Integer.parseInt(command[1]);
                             queue.push(n);
                             bw.write("ok\n");
-                            break;
-                        case "pop":
-                            if (queue.isEmpty()){
+                        }
+                        case "pop" -> {
+                            if (queue.isEmpty()) {
                                 bw.write("error\n");
-                            }
-                            else {
+                            } else {
                                 bw.write(queue.front() + "\n");
                                 queue.pop();
                             }
-                            break;
-                        case "front":
-                            if (queue.isEmpty()){
+                        }
+                        case "front" -> {
+                            if (queue.isEmpty()) {
                                 bw.write("error\n");
-                            }
-                            else {
+                            } else {
                                 bw.write(queue.front() + "\n");
                             }
-                            break;
-                        case "size":
-                            bw.write(queue.getSize() + "\n");
-                            break;
-                        case "clear":
+                        }
+                        case "size" -> bw.write(queue.getSize() + "\n");
+                        case "clear" -> {
                             queue.clear();
                             bw.write("ok\n");
-                            break;
-                        case "exit":
+                        }
+                        case "exit" -> {
                             bw.write("bye");
                             return;
+                        }
                     }
                 }
             } catch (IOException ex) {
@@ -110,8 +107,6 @@ public class queue {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
-
 
     }
 
