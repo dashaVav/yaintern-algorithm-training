@@ -1,36 +1,32 @@
-package algorithm_training.task_16;
+package algorithm_training.task_11;
 
 import java.io.*;
 
-//ссылка на задание https://contest.yandex.ru/contest/45468/problems/16/
-public class queue {
-
+//ссылка на задание https://contest.yandex.ru/contest/45468/problems/11/
+public class Stack {
     public static class Node {
-            int num;
-            Node prev;
-            Node next;
-            Node(int n) {
-                num = n;
-            }
-            Node(int n, Node node){
-                num = n;
-                prev = node;
-            }
+        int num;
+        Node prev;
+        Node next;
+        Node(int n) {
+            num = n;
+        }
+        Node(int n, Node nodePrev){
+            num = n;
+            prev = nodePrev;
+        }
     }
 
     private int size = 0;
-    private Node head;
     private Node tail;
 
     public boolean isEmpty(){
-        return head == null;
+        return size == 0;
     }
 
     public void push(int n) {
-        if (head == null) {
-            var node = new Node(n);
-            head = node;
-            tail = node;
+        if (tail == null) {
+            tail = new Node(n);
             size ++;
             return;
         }
@@ -40,59 +36,56 @@ public class queue {
         size ++;
     }
 
-    public void pop() {
-        if (isEmpty()) {
-            return;
-        }
-        head = head.next;
+    public int pop() {
+        var n = back();
+        tail = tail.prev;
+        if (tail != null)  tail.next =  null;
         size --;
-    }
-
-    public int front() {
-        return head.num;
+        return n;
     }
 
     public int getSize(){
         return size;
     }
 
+    public int back(){
+        return tail.num;
+    }
+
     public void clear() {
-        head = null;
         tail = null;
         size = 0;
     }
 
     public static void main(String[] args){
         String s;
-        queue queue = new queue();
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\algorithm_training\\task_16\\input.txt"))) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\java\\algorithm_training\\task_16\\output.txt"))) {
+        Stack stack = new Stack();
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\algorithm_training\\task_11\\input.txt"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\java\\algorithm_training\\task_11\\output.txt"))) {
                 while ((s = br.readLine()) != null) {
                     String[] command = s.split(" ");
                     switch (command[0]) {
                         case "push" -> {
-                            int n = Integer.parseInt(command[1]);
-                            queue.push(n);
+                            stack.push(Integer.parseInt(command[1]));
                             bw.write("ok\n");
                         }
                         case "pop" -> {
-                            if (queue.isEmpty()) {
+                            if (stack.isEmpty()) {
                                 bw.write("error\n");
                             } else {
-                                bw.write(queue.front() + "\n");
-                                queue.pop();
+                                bw.write(stack.pop() + "\n");
                             }
                         }
-                        case "front" -> {
-                            if (queue.isEmpty()) {
+                        case "back" -> {
+                            if (stack.isEmpty()) {
                                 bw.write("error\n");
                             } else {
-                                bw.write(queue.front() + "\n");
+                                bw.write(stack.back() + "\n");
                             }
                         }
-                        case "size" -> bw.write(queue.getSize() + "\n");
+                        case "size" -> bw.write(stack.getSize() + "\n");
                         case "clear" -> {
-                            queue.clear();
+                            stack.clear();
                             bw.write("ok\n");
                         }
                         case "exit" -> {
@@ -109,5 +102,4 @@ public class queue {
         }
 
     }
-
 }

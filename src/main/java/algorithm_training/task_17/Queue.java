@@ -5,7 +5,7 @@ import java.io.*;
 import static java.lang.Math.pow;
 
 //ссылка на задание https://contest.yandex.ru/contest/45468/problems/17/
-public class queue_17 {
+public class Queue {
     private static class Node {
         int num;
         Node prev;
@@ -57,8 +57,8 @@ public class queue_17 {
     }
 
     public static void main(String[] args) throws IOException {
-        queue_17 queue1 = new queue_17();
-        queue_17 queue2 = new queue_17();
+        Queue queue1 = new Queue();
+        Queue queue2 = new Queue();
 
         int count = 0;
 

@@ -3,7 +3,7 @@ package algorithm_training.task_18;
 import java.io.*;
 
 //ссылка на задание https://contest.yandex.ru/contest/45468/problems/18/?success=83580230#175943/2016_11_22/pJwxx9Ejoh
-public class deque {
+public class Deque {
     public static class Node {
         int num;
         Node prev;
@@ -90,7 +90,7 @@ public class deque {
 
     public static void main(String[] args){
         String s;
-        deque deque = new deque();
+        Deque deque = new Deque();
         try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\algorithm_training\\task_18\\input.txt"))) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\java\\algorithm_training\\task_18\\output.txt"))) {
                 while ((s = br.readLine()) != null) {
